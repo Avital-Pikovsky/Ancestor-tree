@@ -1,5 +1,12 @@
+/*
+ *AUTHOR: Avital Pikovsky
+ *
+ * Date: 2020-04
+ *
+ */
 #include "FamilyTree.hpp"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 using namespace family;
@@ -43,7 +50,7 @@ Tree &Tree::addFather(string son, string father)
 //A function that adds a mother to someone who already exists in the tree.
 Tree &Tree::addMother(string son, string mother)
 {
-    if (son == name) // && mom == nullptr)
+    if (son == name)
     {
         if (mom == nullptr)
         {
@@ -78,7 +85,9 @@ Tree &Tree::addMother(string son, string mother)
     //else if (son != name)
     throw runtime_error(son + " ///does not exist!");
 }
-
+//A function that accepts the name of 
+//someone who is in the tree and returns its relation to the root.
+//If it is not found in the tree, return unrelated.
 string Tree::relation(string relative)
 {
     string ans = "unrelated";
@@ -117,12 +126,12 @@ string Tree::relation(string relative)
                 ans = "great-" + ans;
         }
     }
-
     return ans;
 }
+//A function that accepts a string that specifies a relative and returns
+// the person's name from the tree that maintains this ratio.
 string Tree::find(string relation)
 {
-
     if (relation == "me")
         return name;
     if (relation == "mother")
@@ -130,31 +139,44 @@ string Tree::find(string relation)
     if (relation == "father")
         return dad->name;
 
-    // cout << "nuu maa : " << relation << endl;
-    // string str = relation;
-    // for (size_t i = 0; i <= relation.length() - 1; i++)
-    // {
-    //     cout << "nuu maa2 : " << str << endl;
+    if (relation.at(0) == 'g')
+    {
+        relation.erase(std::remove(relation.begin(), relation.end(), '-'), relation.end());
 
-    //     if (str.at(i) == '-')
-    //     {
-    //         str.erase(i);
-    //     }
-    // }
+        for (size_t i = 0; i < (relation.length() / 5) - 1; i++)
+        {
+            relation.erase(0, 5);
 
-    return "";
+            if (dad != nullptr)
+                return dad->find(relation);
+
+            if (mom != nullptr)
+                return mom->find(relation);
+        }
+    }
+    throw runtime_error("The tree cannot handle the: " + relation + " relation");
 }
 void Tree::display()
 {
     int num;
     printFamily(num = 0);
 }
+//A function that accepts the name of someone who is in the tree
+// and deletes it and all of its parents from the tree.
 
 void Tree::remove(string relative)
 {
-    // if (relation(relative) == "unrelated"){
-    //     throw runtime_error(relative + " doesn't exist");
-
+    static bool initialized;
+    if (!initialized)
+    {
+        initialized = true;
+        if (relation(relative).compare("unrelated") == 0)
+            throw runtime_error(relative + " doesn't exist");
+    }
+    if (name == relative)
+    {
+        throw runtime_error(name + " can't be removed!");
+    }
     if ((dad != nullptr) && (dad->name == relative))
     {
         delete dad;
@@ -176,15 +198,11 @@ void Tree::remove(string relative)
         if (mom != nullptr)
             mom->remove(relative);
     }
-    if (name == relative)
-    {
-        throw runtime_error(name + " can't be removed!");
-    }
 }
 void Tree::printFamily(int num)
 {
     if (num == 0)
-        cout << "*************" << name << "'s Famiy:" << endl;
+        cout << "*************" << name << "'s Famiy:*************" << endl;
 
     num += 10;
 

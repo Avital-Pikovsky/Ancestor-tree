@@ -1,3 +1,9 @@
+/*
+ *AUTHOR: Avital Pikovsky
+ *
+ * Date: 2020-04
+ *
+ */
 #include "FamilyTree.hpp"
 #include <iostream>
 #include "doctest.h"
