@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 
 using namespace std;
 
@@ -14,7 +13,7 @@ class Tree
 public:
     Tree(string n)
     {
-        name = n;;
+        name = n;
         dad = nullptr;
         mom = nullptr;
     }
@@ -24,14 +23,17 @@ public:
     string relation(string relative);
     string find(string relation);
     void display();
+    void printFamily(int num);
     void remove(string relative);
 
     ~Tree()
     {
         if (dad != nullptr)
             delete dad;
+        
         if (mom != nullptr)
             delete mom;
+        
     }
 };
 

@@ -2,44 +2,48 @@
 #include <iostream>
 #include "doctest.h"
 
+using namespace family;
 using namespace std;
 
 //***************First family***************
-TEST_CASE("Check the correctness of relations -first family"){
+TEST_CASE("Check the correctness of relations -first family")
+{
     family::Tree T1("Ariel");
     T1.addFather("Ariel", "Adir")
-    .addMother("Ariel", "Shelly")
+        .addMother("Ariel", "Shelly")
 
-    .addFather("Adir", "Ofir")
-    .addMother("Adir", "Maayan")
-    .addFather("Shelly", "Bar")
-    .addMother("Shelly", "Sapir")
+        .addFather("Adir", "Ofir")
+        .addMother("Adir", "Maayan")
+        .addFather("Shelly", "Bar")
+        .addMother("Shelly", "Sapir")
 
-    .addFather("Ofir", "Gal")
-    .addMother("Ofir", "Talya")
-    .addFather("Maayan", "Shay")
-    .addMother("Maayan", "Sharon")
-    .addFather("Bar", "Lior")
-    .addMother("Bar", "Hadar")
-    .addFather("Sapir", "Dekel")
-    .addMother("Sapir", "Aviya")
+        .addFather("Ofir", "Gal")
+        .addMother("Ofir", "Talya")
+        .addFather("Maayan", "Shay")
+        .addMother("Maayan", "Sharon")
+        .addFather("Bar", "Lior")
+        .addMother("Bar", "Hadar")
+        .addFather("Sapir", "Dekel")
+        .addMother("Sapir", "Aviya")
 
-    .addFather("Gal", "Avihai")
-    .addMother("Gal", "Nataly")
-    .addFather("Talya", "Yonatan")
-    .addMother("Talya", "Moriya")
-    .addFather("Shay", "Nimrod")
-    .addMother("Shay", "Tehila")
-    .addFather("Sharon", "Yoav")
-    .addMother("Sharon", "Shira")
-    .addFather("Lior", "Yarden")
-    .addMother("Lior", "Hila")
-    .addFather("Hadar", "Shimon")
-    .addMother("Hadar", "Stav")
-    .addFather("Dekel", "Netanel")
-    .addMother("Dekel", "Aviv")
-    .addFather("Aviya", "Eliav")
-    .addMother("Aviya", "Rivka");
+        .addFather("Gal", "Avihai")
+        .addMother("Gal", "Nataly")
+        .addFather("Talya", "Yonatan")
+        .addMother("Talya", "Moriya")
+        .addFather("Shay", "Nimrod")
+        .addMother("Shay", "Tehila")
+        .addFather("Sharon", "Yoav")
+        .addMother("Sharon", "Shira")
+        .addFather("Lior", "Yarden")
+        .addMother("Lior", "Hila")
+        .addFather("Hadar", "Shimon")
+        .addMother("Hadar", "Stav")
+        .addFather("Dekel", "Netanel")
+        .addMother("Dekel", "Aviv")
+        .addFather("Aviya", "Eliav")
+        .addMother("Aviya", "Rivka");
+
+    T1.display();
 
     CHECK(T1.relation("Ariel") == "me");
     CHECK(T1.relation("Adir") == "father");
@@ -62,11 +66,11 @@ TEST_CASE("Check the correctness of relations -first family"){
     CHECK(T1.relation("Avihai") == "great-great-grandfather");
     CHECK(T1.relation("Nataly") == "great-great-grandmother");
     CHECK(T1.relation("Yonatan") == "great-great-grandfather");
-    CHECK(T1.relation("Sagi") == "great-great-grandmother");
+    CHECK(T1.relation("Moriya") == "great-great-grandmother");
     CHECK(T1.relation("Nimrod") == "great-great-grandfather");
     CHECK(T1.relation("Tehila") == "great-great-grandmother");
-    CHECK(T1.relation("Snir") == "great-great-grandfather");
-    CHECK(T1.relation("Yoav") == "great-great-grandmother");
+    CHECK(T1.relation("Yoav") == "great-great-grandfather");
+    CHECK(T1.relation("Shira") == "great-great-grandmother");
     CHECK(T1.relation("Yarden") == "great-great-grandfather");
     CHECK(T1.relation("Hila") == "great-great-grandmother");
     CHECK(T1.relation("Shimon") == "great-great-grandfather");
@@ -116,41 +120,44 @@ TEST_CASE("Check the correctness of relations -first family"){
     CHECK(T1.find("father") == "Adir");
 }
 //***************Second family***************
-TEST_CASE("Check the correctness of relations -second family"){
+TEST_CASE("Check the correctness of relations -second family")
+{
     family::Tree T2("Avital");
-    T2.addFather("Avital", "Liya")
-    .addMother("Avital", "Niv")
+    T2.addFather("Avital", "Niv")
+        .addMother("Avital", "Liya")
 
-    .addFather("Liya", "Elad")
-    .addMother("Liya", "Dana")
-    .addFather("Niv", "Liad")
-    .addMother("Niv", "Yasmin")
+        .addFather("Liya", "Elad")
+        .addMother("Liya", "Dana")
+        .addFather("Niv", "Liad")
+        .addMother("Niv", "Yasmin")
 
-    .addFather("Elad", "Evyatar")
-    .addMother("Elad", "Liel")
-    .addFather("Dana", "Asif")
-    .addMother("Dana", "Shaked")
-    .addFather("Liad", "Gadi")
-    .addMother("Liad", "Odelya")
-    .addFather("Yasmin", "Adam")
-    .addMother("Yasmin", "Eliraz")
+        .addFather("Elad", "Evyatar")
+        .addMother("Elad", "Liel")
+        .addFather("Dana", "Asif")
+        .addMother("Dana", "Shaked")
+        .addFather("Liad", "Gadi")
+        .addMother("Liad", "Odelya")
+        .addFather("Yasmin", "Adam")
+        .addMother("Yasmin", "Eliraz")
 
-    .addFather("Evyatar", "Naor")
-    .addMother("Evyatar", "Hagar")
-    .addFather("Liel", "Chen")
-    .addMother("Liel", "Mor")
-    .addFather("Asif", "Roee")
-    .addMother("Asif", "Topaz")
-    .addFather("Shaked", "Liron")
-    .addMother("Shaked", "Michal")
-    .addFather("Gadi", "Raz")
-    .addMother("Gadi", "Lital")
-    .addFather("Odelya", "Omer")
-    .addMother("Odelya", "Nitzan")
-    .addFather("Adam", "Idan")
-    .addMother("Adam", "Keren")
-    .addFather("Eliraz", "Ben")
-    .addMother("Eliraz", "Reut");
+        .addFather("Evyatar", "Naor")
+        .addMother("Evyatar", "Hagar")
+        .addFather("Liel", "Chen")
+        .addMother("Liel", "Mor")
+        .addFather("Asif", "Roee")
+        .addMother("Asif", "Topaz")
+        .addFather("Shaked", "Liron")
+        .addMother("Shaked", "Michal")
+        .addFather("Gadi", "Raz")
+        .addMother("Gadi", "Lital")
+        .addFather("Odelya", "Omer")
+        .addMother("Odelya", "Nitzan")
+        .addFather("Adam", "Idan")
+        .addMother("Adam", "Keren")
+        .addFather("Eliraz", "Ben")
+        .addMother("Eliraz", "Reut");
+
+    T2.display();
 
     CHECK(T2.relation("Avital") == "me");
     CHECK(T2.relation("Niv") == "father");
@@ -225,5 +232,4 @@ TEST_CASE("Check the correctness of relations -second family"){
     CHECK(T2.find("me") == "Avital");
     CHECK(T2.find("mother") == "Liya");
     CHECK(T2.find("father") == "Niv");
-
 }
