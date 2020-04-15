@@ -85,7 +85,7 @@ Tree &Tree::addMother(string son, string mother)
     //else if (son != name)
     throw runtime_error(son + " ///does not exist!");
 }
-//A function that accepts the name of 
+//A function that gets the name of 
 //someone who is in the tree and returns its relation to the root.
 //If it is not found in the tree, return unrelated.
 string Tree::relation(string relative)
@@ -128,7 +128,7 @@ string Tree::relation(string relative)
     }
     return ans;
 }
-//A function that accepts a string that specifies a relative and returns
+//A function that gets a string that specifies a relative and returns
 // the person's name from the tree that maintains this ratio.
 string Tree::find(string relation)
 {
@@ -161,15 +161,15 @@ void Tree::display()
     int num;
     printFamily(num = 0);
 }
-//A function that accepts the name of someone who is in the tree
+//A function that gets the name of someone who is in the tree
 // and deletes it and all of its parents from the tree.
 
 void Tree::remove(string relative)
 {
-    static bool initialized;
-    if (!initialized)
+    static bool check;
+    if (!check)
     {
-        initialized = true;
+        check = true;
         if (relation(relative).compare("unrelated") == 0)
             throw runtime_error(relative + " doesn't exist");
     }
