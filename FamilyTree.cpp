@@ -134,25 +134,29 @@ string Tree::find(string relation)
 {
     if (relation == "me")
         return name;
-    if (relation == "mother")
+    if (relation == "mother" && mom!=nullptr)
         return mom->name;
-    if (relation == "father")
+    if (relation == "father" && dad!=nullptr)
         return dad->name;
 
     if (relation.at(0) == 'g')
     {
         relation.erase(std::remove(relation.begin(), relation.end(), '-'), relation.end());
 
-        for (size_t i = 0; i < (relation.length() / 5) - 1; i++)
-        {
             relation.erase(0, 5);
 
             if (dad != nullptr)
+            try{
                 return dad->find(relation);
+            }
+            catch(runtime_error &x){};
 
             if (mom != nullptr)
+            try{
                 return mom->find(relation);
-        }
+            }
+            catch(runtime_error &x){};
+        
     }
     throw runtime_error("The tree cannot handle the: " + relation + " relation");
 }
@@ -166,13 +170,15 @@ void Tree::display()
 
 void Tree::remove(string relative)
 {
-    static bool check;
-    if (!check)
-    {
-        check = true;
-        if (relation(relative).compare("unrelated") == 0)
-            throw runtime_error(relative + " doesn't exist");
-    }
+    // static bool check = false;
+    // if (!check)
+    // {
+    //     cout<<"name: "<<name<<endl;
+    //     cout<<"relative: "<<relative<<endl;
+    //     check = true;
+    //     if (relation(relative)=="unrelated")
+    //         throw runtime_error(relative + " doesn't exist");
+    // }
     if (name == relative)
     {
         throw runtime_error(name + " can't be removed!");
@@ -181,23 +187,33 @@ void Tree::remove(string relative)
     {
         delete dad;
         dad = nullptr;
+        return;
     }
-    else
-    {
-        if (dad != nullptr)
+    else if (dad != nullptr){
+        try{
             dad->remove(relative);
+            return;
+        }
+        catch(runtime_error &x){};
     }
     if ((mom != nullptr) && (mom->name == relative))
     {
 
         delete mom;
         mom = nullptr;
+        return;
     }
-    else
-    {
-        if (mom != nullptr)
+    else if (mom != nullptr){
+        try{
             mom->remove(relative);
+            return;
+        }
+        catch(runtime_error &x){};
+        
     }
+    throw runtime_error(relative + " doesn't exist");
+
+
 }
 void Tree::printFamily(int num)
 {
