@@ -170,15 +170,7 @@ void Tree::display()
 
 void Tree::remove(string relative)
 {
-    // static bool check = false;
-    // if (!check)
-    // {
-    //     cout<<"name: "<<name<<endl;
-    //     cout<<"relative: "<<relative<<endl;
-    //     check = true;
-    //     if (relation(relative)=="unrelated")
-    //         throw runtime_error(relative + " doesn't exist");
-    // }
+
     if (name == relative)
     {
         throw runtime_error(name + " can't be removed!");
